@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}{{pet.name}} Info{% endblock %}
+
+{% block content %}
+    <p>Name: {{pet.name}}</p>
+    <p>Species: {{pet.species}}</p>
+    {% if pet.age %}
+        <p>Age: {{pet.age}}</p>
+    {% endif %}
+    {% if pet.photo_url %}
+        <p>Photo:</p> <img src="{{pet.photo_url}}" alt="" class="animal">
+    {% endif %}
+
+    <h2>Edit {{pet.name}}</h2>
+        <form id="pet-add-form" method="POST">
+            {{form.hidden_tag()}}
+            {% for field in form 
+                if field.widget.input_type != 'hidden' %}
+            
+            <p>
+                {{ field.label }}
+                {{ field }}
+    
+                {% for error in field.errors %}
+                    {{error}}
+                {% endfor %}
+            </p>
+            {% endfor %}
+    
+            <button type="submit">Edit pet</button>
+        </form>
+{% endblock %}

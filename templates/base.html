@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Show pets{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    {% block content %}
+        {% for pet in pets %}
+            <div>
+                <img src="{{pet.photo_url}}" alt="" class="animal">
+                <p><a href="/{{pet.id}}" class="">{{pet.name}}</a> is {%if pet.available%}Available{% else %}Unavailable{% endif %}</p>
+            </div>
+        {% endfor %}
+        <button><a href="/add">Add a pet</a></button>
+    {% endblock %}
+</body>
+</html>
